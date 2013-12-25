@@ -11,7 +11,7 @@
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
  */
-class ESimpleResourceManager extends EResourceManager
+class ESimpleResourceManager extends CApplicationComponent implements IResourceManager
 {
 	const DEFAULT_DIR = 'uploads';
 

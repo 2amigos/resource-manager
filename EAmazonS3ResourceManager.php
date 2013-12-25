@@ -11,7 +11,7 @@
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
  */
-class EAmazonS3ResourceManager extends EResourceManager
+class EAmazonS3ResourceManager extends CApplicationComponent implements IResourceManager
 {
 	/**
 	 * @param CUploadedFile $file

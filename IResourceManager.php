@@ -6,12 +6,12 @@
  */
 
 /**
- * EResourceManager class.
+ * IResourceManager interface.
  *
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
  */
-abstract class EResourceManager extends CApplicationComponent
+interface IResourceManager
 {
 	/**
 	 * @param CUploadedFile $file
@@ -19,17 +19,17 @@ abstract class EResourceManager extends CApplicationComponent
 	 * @param array $options
 	 * @return boolean
 	 */
-	abstract public function saveFile($file, $name, $options = array());
+	public function saveFile($file, $name, $options = array());
 
 	/**
 	 * @param string $name
 	 * @return string
 	 */
-	abstract public function getFileUrl($name);
+	public function getFileUrl($name);
 
 	/**
 	 * @param string $name
 	 * @return boolean
 	 */
-	abstract public function getIsFileExist($name);
+	public function getIsFileExist($name);
 }
