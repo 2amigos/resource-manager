@@ -17,6 +17,7 @@ abstract class EResourceManager extends CApplicationComponent
 	 * @param CUploadedFile $file
 	 * @param string $name
 	 * @param array $options
+	 * @return boolean
 	 */
 	abstract public function saveFile($file, $name, $options = array());
 
