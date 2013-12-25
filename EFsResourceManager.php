@@ -6,12 +6,12 @@
  */
 
 /**
- * ESimpleResourceManager class.
+ * EFsResourceManager class.
  *
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
  */
-class ESimpleResourceManager extends CApplicationComponent implements IResourceManager
+class EFsResourceManager extends CApplicationComponent implements IResourceManager
 {
 	const DEFAULT_DIR = 'uploads';
 
