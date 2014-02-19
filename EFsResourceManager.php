@@ -10,6 +10,7 @@
  *
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
+ * @link http://2amigos.us/
  *
  * @property string $basePath of the resource storage.
  * @property string $baseUrl of the resource storage.

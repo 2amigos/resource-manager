@@ -11,6 +11,7 @@
  *
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
+ * @link http://2amigos.us/
  */
 interface IResourceManager
 {
