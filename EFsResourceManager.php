@@ -6,23 +6,32 @@
  */
 
 /**
- * EFsResourceManager class.
+ * File system resource manager implementation.
  *
  * @author Alexander Kochetov <creocoder@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
+ *
+ * @property string $basePath of the resource storage.
+ * @property string $baseUrl of the resource storage.
  */
 class EFsResourceManager extends CApplicationComponent implements IResourceManager
 {
-	const DEFAULT_DIR = 'uploads';
+	/**
+	 * @const string default directory name where files will be uploaded.
+	 */
+	const DEFAULT_DIRECTORY = 'uploads';
 
+	/**
+	 * @var string base path of the resource storage.
+	 */
 	private $_basePath;
+	/**
+	 * @var string base URL of the resource storage.
+	 */
 	private $_baseUrl;
 
 	/**
-	 * @param CUploadedFile $file
-	 * @param string $name
-	 * @param array $options
-	 * @return boolean
+	 * @inheritdoc
 	 */
 	public function saveFile($file, $name, $options = array())
 	{
@@ -33,17 +42,15 @@ class EFsResourceManager extends CApplicationComponent implements IResourceManag
 	}
 
 	/**
-	 * @param string $name
-	 * @return string
+	 * @inheritdoc
 	 */
-	public function getFilePath($name)
+	public function deleteFile($name)
 	{
-		return $this->getBasePath() . DIRECTORY_SEPARATOR . $name;
+		return unlink($this->getFilePath($name));
 	}
 
 	/**
-	 * @param string $name
-	 * @return string
+	 * @inheritdoc
 	 */
 	public function getFileUrl($name)
 	{
@@ -51,22 +58,32 @@ class EFsResourceManager extends CApplicationComponent implements IResourceManag
 	}
 
 	/**
-	 * @param string $name
-	 * @return boolean
+	 * @inheritdoc
 	 */
-	public function getIsFileExist($name)
+	public function getIsFileExists($name)
 	{
 		return file_exists($this->getFilePath($name));
 	}
 
 	/**
-	 * @return string
+	 * Returns path to the file by the given name.
+	 * @param string $name of the file to return its path.
+	 * @return string path to the requested file.
+	 */
+	public function getFilePath($name)
+	{
+		return $this->getBasePath() . DIRECTORY_SEPARATOR . $name;
+	}
+
+	/**
+	 * Returns the base path value.
+	 * @return string the base path value.
 	 */
 	public function getBasePath()
 	{
 		if ($this->_basePath === null) {
 			$this->setBasePath(
-				dirname(Yii::app()->getRequest()->getScriptFile()) . DIRECTORY_SEPARATOR . self::DEFAULT_DIR
+				dirname(Yii::app()->getRequest()->getScriptFile()) . DIRECTORY_SEPARATOR . self::DEFAULT_DIRECTORY
 			);
 		}
 
@@ -74,30 +91,33 @@ class EFsResourceManager extends CApplicationComponent implements IResourceManag
 	}
 
 	/**
-	 * @param string $value
+	 * Changes the base path value.
+	 * @param string $basePath value to be set.
 	 */
-	public function setBasePath($value)
+	public function setBasePath($basePath)
 	{
-		$this->_basePath = rtrim($value, DIRECTORY_SEPARATOR);
+		$this->_basePath = rtrim($basePath, '/\\');
 	}
 
 	/**
-	 * @return string
+	 * Returns the base URL value.
+	 * @return string the base URL value.
 	 */
 	public function getBaseUrl()
 	{
-		if($this->_baseUrl === null) {
-			$this->setBaseUrl(Yii::app()->getRequest()->getBaseUrl() . '/' . self::DEFAULT_DIR);
+		if ($this->_baseUrl === null) {
+			$this->setBaseUrl(Yii::app()->getRequest()->getBaseUrl() . '/' . self::DEFAULT_DIRECTORY);
 		}
 
 		return $this->_baseUrl;
 	}
 
 	/**
-	 * @param string $value
+	 * Changes the base URL value.
+	 * @param string $baseUrl value to be set.
 	 */
-	public function setBaseUrl($value)
+	public function setBaseUrl($baseUrl)
 	{
-		$this->_baseUrl = rtrim($value, '/');
+		$this->_baseUrl = rtrim($baseUrl, '/');
 	}
 }
