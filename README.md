@@ -47,7 +47,28 @@ Done. Now you can use our component to save some data to the Amazon S3 storage.
 Usage
 -----
 
-To be done.
+Here's possible code of your view:
+
+```php
+<?php echo CHtml::beginForm('', 'post', array('enctype' => 'multipart/form-data')); ?>
+	<?php echo CHtml::fileField('user-photo'); ?>
+	<?php echo CHtml::submitButton('Upload'); ?>
+<?php echo CHtml::endForm(); ?>
+```
+
+And this is how could look your controller code for processing the uploaded file:
+
+```php
+$userPhoto = CUploadedFile::getInstanceByName('user-photo');
+if ($userPhoto !== null) {
+	if (!Yii::app()->getComponent('resourceManager')->saveFile($userPhoto, $userPhoto->getName())) {
+		throw new CHttpException(500, 'Sorry, unable to upload your profile photo.');
+	}
+	Yii::app()->getUser()->setFlash('userPhotoUpdated', 'Great, your profile photo has been updated!');
+	$this->refresh();
+}
+$this->render('userPhotoForm');
+```
 
 Notes
 -----
