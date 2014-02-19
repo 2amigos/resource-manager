@@ -64,13 +64,19 @@ class EAmazonS3ResourceManager extends CApplicationComponent implements IResourc
 	 */
 	public function saveFile($file, $name, $options = array())
 	{
-		/** @var Model $result */
-		$result = $this->getClient()->putObject(array_merge(array(
+		$defaultOptions = array(
 			'Bucket' => $this->bucket,
 			'Key' => $name,
-			'SourceFile' => $file->getTempName(),
 			'ACL' => CannedAcl::PUBLIC_READ,
-		), $options));
+		);
+		if ($file instanceof CUploadedFile) {
+			$defaultOptions['SourceFile'] = $file->getTempName();
+		} else {
+			$defaultOptions['Body'] = $file;
+		}
+
+		/** @var Model $result */
+		$result = $this->getClient()->putObject(array_merge($defaultOptions, $options));
 
 		return $result->hasKey('ObjectURL') &&
 			is_string($result->get('ObjectURL')) &&

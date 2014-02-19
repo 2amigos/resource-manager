@@ -17,7 +17,8 @@ interface IResourceManager
 {
 	/**
 	 * Saves the given file.
-	 * @param CUploadedFile $file to be uploaded and persisted.
+	 * @param CUploadedFile|string $file to be uploaded and persisted. Could be either `CUploadedFile`
+	 * instance or blob data to be saved.
 	 * @param string $name of the file.
 	 * @param array $options additional options for the file save process.
 	 * @return boolean whether file was successfully uploaded and saved.

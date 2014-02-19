@@ -52,7 +52,7 @@ Here's possible code of your view:
 ```php
 <?php echo CHtml::beginForm('', 'post', array('enctype' => 'multipart/form-data')); ?>
 	<?php echo CHtml::fileField('user-photo'); ?>
-	<?php echo CHtml::submitButton('Upload'); ?>
+	<?php echo CHtml::submitButton('Upload new image'); ?>
 <?php echo CHtml::endForm(); ?>
 ```
 

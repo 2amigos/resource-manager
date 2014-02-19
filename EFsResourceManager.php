@@ -36,10 +36,10 @@ class EFsResourceManager extends CApplicationComponent implements IResourceManag
 	 */
 	public function saveFile($file, $name, $options = array())
 	{
-		$path = $this->getBasePath() . DIRECTORY_SEPARATOR . $name;
-		@mkdir(dirname($path), 0777, true);
+		$filePath = $this->getBasePath() . DIRECTORY_SEPARATOR . $name;
+		@mkdir(dirname($filePath), 0777, true);
 
-		return $file->saveAs($path);
+		return $file instanceof CUploadedFile ? $file->saveAs($filePath) : file_put_contents($filePath, $file, LOCK_EX);
 	}
 
 	/**
