@@ -1,0 +1,24 @@
+{
+	"name": "2amigos/resource-manager",
+	"description": "Resource manager eases your project resources management.",
+	"keywords": ["yii", "extension", "component", "resource", "aws", "s3", "amazon"],
+	"homepage": "https://github.com/2amigos/resource-manager",
+	"type": "yii-extension",
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Alexander Kochetov",
+			"email": "creocoder@gmail.com"
+		},
+		{
+			"name": "Timur Ruziev",
+			"email": "resurtm@gmail.com",
+			"homepage": "http://resurtm.com"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {
+		"yiisoft/yii": "*",
+		"aws/aws-sdk-php": "2.*"
+	}
+}
