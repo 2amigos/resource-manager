@@ -100,6 +100,26 @@ class EAmazonS3ResourceManager extends CApplicationComponent implements IResourc
 	/**
 	 * @inheritdoc
 	 */
+	public function copyFile($sourceName, $targetName)
+	{
+		if (!$this->getIsFileExists($sourceName)) {
+			return false;
+		}
+
+		$result = $this->getClient()->copyObject(array(
+			'Bucket' => $this->bucket,
+			'Key' => $targetName,
+			'CopySource' => "{$this->bucket}/{$sourceName}",
+		));
+
+		return $result->hasKey('RequestId') &&
+			is_string($result->get('RequestId')) &&
+			strlen($result->get('RequestId')) > 0;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function getFileUrl($name)
 	{
 		return $this->getClient()->getObjectUrl($this->bucket, $name);
