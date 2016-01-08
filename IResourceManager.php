@@ -33,6 +33,14 @@ interface IResourceManager
 	public function deleteFile($name);
 
 	/**
+	 * Copies existing file to the new location.
+	 * @param string $sourceName source file name.
+	 * @param string $targetName target file name.
+	 * @return boolean status of the file copy operation.
+	 */
+	public function copyFile($sourceName, $targetName);
+
+	/**
 	 * Returns URL to the file by the given name.
 	 * @param string $name of the file to be used to generate a URL.
 	 * @return string URL to the requested file.

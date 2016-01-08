@@ -53,6 +53,20 @@ class EFsResourceManager extends CApplicationComponent implements IResourceManag
 	/**
 	 * @inheritdoc
 	 */
+	public function copyFile($sourceName, $targetName)
+	{
+		if (!$this->getIsFileExists($sourceName)) {
+			return false;
+		}
+
+		$sourceName = $this->getFilePath($sourceName);
+		$targetName = $this->getFilePath($targetName);
+		return copy($sourceName, $targetName);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function getFileUrl($name)
 	{
 		return $this->getBaseUrl() . '/' . $name;
